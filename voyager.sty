@@ -1,0 +1,472 @@
+% Parial rewrite of the LaTeX2e package for internal distribution for Didi
+% Research Labs. Voyager team. This style package is based on NIPS 2018.
+% Zafar Takhirov (zafartakhirov@)
+%
+% if you need to pass options to natbib, use, e.g.:
+% \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading voyager
+%
+% to avoid loading the natbib package, add option nonatbib:
+% \usepackage[nonatbib]{voyager}
+%
+% If you want to remove the ``CONFIDENTIAL'' notice, use `public' option
+% \usepackage[public]{voyager}
+%
+% Use ``wip'' to add the notice that the current work is still in progress.
+% \usepackage[wip]{voyager}
+%
+% use ``lineno'' option to enable the line numbers.
+% \usepackage[lineno]{voyager}
+%
+% ``anonymous'' option anonymizes the name of the author.
+% \usepackage[anonymous]{voyager}
+%
+% ``noauthor'' option is used to completely remove all the author fields.
+%
+% ``info'' option adds company and team information in the notice
+%
+% ``nonotice'' option removes any footer notices.
+%
+% The \author macro works with any number of authors. There are two
+% commands used to separate the names and addresses of multiple
+% authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to
+% break the lines. Using \AND forces a line break at that point. So,
+% if LaTeX puts 3 of 4 authors names on the first line, and the last
+% on the second line, try using \AND instead of \And before the third
+% author name.
+%
+% ---
+% partial rewrite of the LaTeX2e package for submissions to the
+% Conference on Neural Information Processing Systems (NIPS)
+%
+% - uses more LaTeX conventions
+% - line numbers at submission time replaced with aligned numbers from
+%   lineno package
+% - final replaced with [wip], [lineno] package option
+% - automatically loads times package for authors
+% - loads natbib automatically; this can be suppressed with the
+%   [nonatbib] package option
+% - adds foot line to first page identifying the conference
+% - adds wip option for submission to e.g. arXiv
+%
+% Roman Garnett (garnett@wustl.edu) and the many authors of
+% nips15submit_e.sty, including MK and drstrip@sandia
+%
+% Revision history:
+% -- Zafar, July 2018
+% -- Zafar, July 2018
+% -- Zafar, May 2018
+% -- Zafar, March 2018
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{voyager}[2018/07/03 package voyager]
+
+%% BEGIN OPTIONS
+
+% declare nonotice option, which removes the notices from the footer.
+\newif\if@voyagernonotice\@voyagernonoticefalse
+\DeclareOption{nonotice}{
+  \@voyagernonoticetrue
+}
+
+% declare public option, which sets the public copy
+\newif\if@voyagerpublic\@voyagerpublicfalse
+\DeclareOption{public}{
+  \@voyagerpublictrue
+}
+
+% declare wip option, which creates a wip version ready for
+% upload to, e.g., arXiv
+\newif\if@voyagerwip\@voyagerwipfalse
+\DeclareOption{wip}{
+  \@voyagerwiptrue
+}
+
+% declare anonymous option, which anonymizes the work (names hidden).
+\newif\if@voyageranonymous\@voyageranonymousfalse
+\DeclareOption{anonymous}{
+  \@voyageranonymoustrue
+}
+
+% declare noauthor option, which removes authors completely, only leaving the
+% thanks portion.
+\newif\if@voyagernoauthor\@voyagernoauthorfalse
+\DeclareOption{noauthor}{
+  \@voyagernoauthortrue
+}
+
+% declare lineno option, which adds the line numbers.
+\newif\if@voyagerlineno\@voyagerlinenofalse
+\DeclareOption{lineno}{
+  \@voyagerlinenotrue
+}
+
+\newif\if@voyagerinfo\@voyagerinfofalse
+\DeclareOption{info}{
+  \@voyagerinfotrue
+}
+
+% declare nonatbib option, which does not load natbib in case of
+% package clash (users can pass options to natbib via
+% \PassOptionsToPackage)
+\newif\if@natbib\@natbibtrue
+\DeclareOption{nonatbib}{
+  \@natbibfalse
+}
+%% END OF OPTIONS
+
+\ProcessOptions\relax
+
+% fonts
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{phv}
+
+% change this for notice string at bottom and header on top
+\newcommand{\@voyageryear}{\the\year}
+\newcommand{\@voyagerteam}{Voyager}
+\newcommand{\@voyagerlocation}{Mountain View, CA}
+\newcommand{\@voyagercompany}{Didi Research Labs}
+\newcommand{\@voyagerstring}{\@voyagercompany~(\@voyagerteam~\@voyageryear),
+\@voyagerlocation.}
+\newcommand{\@voyagercontributors}{}
+\newcommand{\@voyagerversion}{0.0}
+
+\newcommand{\SetYear}[1]{\renewcommand{\@voyageryear}{#1}}
+\newcommand{\SetTeam}[1]{\renewcommand{\@voyagerteam}{#1}}
+\newcommand{\SetLocation}[1]{\renewcommand{\@voyagerlocation}{#1}}
+\newcommand{\SetCompany}[1]{\renewcommand{\@voyagercompany}{#1}}
+\newcommand{\SetContributors}[1]{\renewcommand{\@voyagercontributors}{#1}}
+\newcommand{\SetVersion}[1]{\renewcommand{\@voyagerversion}{#1}}
+
+\newcommand{\Year}{\@voyageryear}
+\newcommand{\Team}{\@voyagerteam}
+\newcommand{\Location}{\@voyagerlocation}
+\newcommand{\Company}{\@voyagercompany}
+\newcommand{\Contributors}{\@voyagercontributors}
+\newcommand{\Version}{\@voyagerversion}
+
+
+% handle tweaks for camera-ready copy vs. submission copy
+\RequirePackage{color}
+\if@voyagerpublic%
+  \newcommand{\@noticestring}{%
+    {\color{blue}This work is authorized for public release.}%
+  }
+\else
+  \newcommand{\@noticestring}{%
+    {\color{red}This work is NOT authorized for public release.}%
+  }
+\fi
+
+\newcommand{\@wipstring}{}%
+\if@voyagerwip
+  \renewcommand{\@wipstring}{%
+    Work in progress (\Version).~
+  }
+\fi
+
+\if@voyagerlineno
+  % line numbers for submission
+  \RequirePackage{lineno}
+  \linenumbers
+
+  % fix incompatibilities between lineno and amsmath, if required, by
+  % transparently wrapping linenomath environments around amsmath
+  % environments
+  \AtBeginDocument{%
+    \@ifpackageloaded{amsmath}{%
+      \newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+        \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+        \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
+        \renewenvironment{#1}%
+                         {\linenomath\csname old#1\endcsname}%
+                         {\csname oldend#1\endcsname\endlinenomath}%
+      }%
+      \newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+        \patchAmsMathEnvironmentForLineno{#1}%
+        \patchAmsMathEnvironmentForLineno{#1*}%
+      }%
+      \patchBothAmsMathEnvironmentsForLineno{equation}%
+      \patchBothAmsMathEnvironmentsForLineno{align}%
+      \patchBothAmsMathEnvironmentsForLineno{flalign}%
+      \patchBothAmsMathEnvironmentsForLineno{alignat}%
+      \patchBothAmsMathEnvironmentsForLineno{gather}%
+      \patchBothAmsMathEnvironmentsForLineno{multline}%
+    }{}
+  }
+\fi
+
+% load natbib unless told otherwise
+\if@natbib
+  \RequirePackage{natbib}
+\fi
+
+% set page geometry
+\usepackage[verbose=true,letterpaper]{geometry}
+\AtBeginDocument{
+  \newgeometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+  }
+  \@ifpackageloaded{fullpage}
+    {\PackageWarning{voyager}{fullpage package not allowed! Overwriting formatting.}}
+    {}
+  % Fancy headers
+  \RequirePackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \if@voyagerinfo
+    \rhead{\@voyagerteam~\@voyageryear}
+    \lhead{\@voyagercompany}
+  \fi
+  \cfoot{\thepage}
+  \if@voyagerpublic\else
+    \RequirePackage{color}
+    \chead{\color{red}CONFIDENTIAL}
+  \fi
+}
+
+\widowpenalty=10000
+\clubpenalty=10000
+\flushbottom
+\sloppy
+
+% font sizes with reduced leading
+\renewcommand{\normalsize}{%
+  \@setfontsize\normalsize\@xpt\@xipt
+  \abovedisplayskip      7\p@ \@plus 2\p@ \@minus 5\p@
+  \abovedisplayshortskip \z@ \@plus 3\p@
+  \belowdisplayskip      \abovedisplayskip
+  \belowdisplayshortskip 4\p@ \@plus 3\p@ \@minus 3\p@
+}
+\normalsize
+\renewcommand{\small}{%
+  \@setfontsize\small\@ixpt\@xpt
+  \abovedisplayskip      6\p@ \@plus 1.5\p@ \@minus 4\p@
+  \abovedisplayshortskip \z@  \@plus 2\p@
+  \belowdisplayskip      \abovedisplayskip
+  \belowdisplayshortskip 3\p@ \@plus 2\p@   \@minus 2\p@
+}
+\renewcommand{\footnotesize}{\@setfontsize\footnotesize\@ixpt\@xpt}
+\renewcommand{\scriptsize}{\@setfontsize\scriptsize\@viipt\@viiipt}
+\renewcommand{\tiny}{\@setfontsize\tiny\@vipt\@viipt}
+\renewcommand{\large}{\@setfontsize\large\@xiipt{14}}
+\renewcommand{\Large}{\@setfontsize\Large\@xivpt{16}}
+\renewcommand{\LARGE}{\@setfontsize\LARGE\@xviipt{20}}
+\renewcommand{\huge}{\@setfontsize\huge\@xxpt{23}}
+\renewcommand{\Huge}{\@setfontsize\Huge\@xxvpt{28}}
+
+% sections with less space
+\providecommand{\section}{}
+\renewcommand{\section}{%
+  \@startsection{section}{1}{\z@}%
+                {-2.0ex \@plus -0.5ex \@minus -0.2ex}%
+                { 1.5ex \@plus  0.3ex \@minus  0.2ex}%
+                {\large\bf\raggedright}%
+}
+\providecommand{\subsection}{}
+\renewcommand{\subsection}{%
+  \@startsection{subsection}{2}{\z@}%
+                {-1.8ex \@plus -0.5ex \@minus -0.2ex}%
+                { 0.8ex \@plus  0.2ex}%
+                {\normalsize\bf\raggedright}%
+}
+\providecommand{\subsubsection}{}
+\renewcommand{\subsubsection}{%
+  \@startsection{subsubsection}{3}{\z@}%
+                {-1.5ex \@plus -0.5ex \@minus -0.2ex}%
+                { 0.5ex \@plus  0.2ex}%
+                {\normalsize\bf\raggedright}%
+}
+\providecommand{\paragraph}{}
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}{\z@}%
+                {1.5ex \@plus 0.5ex \@minus 0.2ex}%
+                {-1em}%
+                {\normalsize\bf}%
+}
+\providecommand{\subparagraph}{}
+\renewcommand{\subparagraph}{%
+  \@startsection{subparagraph}{5}{\z@}%
+                {1.5ex \@plus 0.5ex \@minus 0.2ex}%
+                {-1em}%
+                {\normalsize\bf}%
+}
+\providecommand{\subsubsubsection}{}
+\renewcommand{\subsubsubsection}{%
+  \vskip5pt{\noindent\normalsize\rm\raggedright}%
+}
+
+% float placement
+\renewcommand{\topfraction      }{0.85}
+\renewcommand{\bottomfraction   }{0.4}
+\renewcommand{\textfraction     }{0.1}
+\renewcommand{\floatpagefraction}{0.7}
+
+\newlength{\@voyagerabovecaptionskip}\setlength{\@voyagerabovecaptionskip}{7\p@}
+\newlength{\@voyagerbelowcaptionskip}\setlength{\@voyagerbelowcaptionskip}{\z@}
+
+\setlength{\abovecaptionskip}{\@voyagerabovecaptionskip}
+\setlength{\belowcaptionskip}{\@voyagerbelowcaptionskip}
+
+% swap above/belowcaptionskip lengths for tables
+\renewenvironment{table}
+  {\setlength{\abovecaptionskip}{\@voyagerbelowcaptionskip}%
+   \setlength{\belowcaptionskip}{\@voyagerabovecaptionskip}%
+   \@float{table}}
+  {\end@float}
+
+% footnote formatting
+\setlength{\footnotesep }{6.65\p@}
+\setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
+\renewcommand{\footnoterule}{\kern-3\p@ \hrule width 12pc \kern 2.6\p@}
+\setcounter{footnote}{0}
+
+% paragraph formatting
+\setlength{\parindent}{\z@}
+\setlength{\parskip  }{5.5\p@}
+
+% list formatting
+\setlength{\topsep       }{4\p@ \@plus 1\p@   \@minus 2\p@}
+\setlength{\partopsep    }{1\p@ \@plus 0.5\p@ \@minus 0.5\p@}
+\setlength{\itemsep      }{2\p@ \@plus 1\p@   \@minus 0.5\p@}
+\setlength{\parsep       }{2\p@ \@plus 1\p@   \@minus 0.5\p@}
+\setlength{\leftmargin   }{3pc}
+\setlength{\leftmargini  }{\leftmargin}
+\setlength{\leftmarginii }{2em}
+\setlength{\leftmarginiii}{1.5em}
+\setlength{\leftmarginiv }{1.0em}
+\setlength{\leftmarginv  }{0.5em}
+\def\@listi  {\leftmargin\leftmargini}
+\def\@listii {\leftmargin\leftmarginii
+              \labelwidth\leftmarginii
+              \advance\labelwidth-\labelsep
+              \topsep  2\p@ \@plus 1\p@    \@minus 0.5\p@
+              \parsep  1\p@ \@plus 0.5\p@ \@minus 0.5\p@
+              \itemsep \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+              \labelwidth\leftmarginiii
+              \advance\labelwidth-\labelsep
+              \topsep    1\p@ \@plus 0.5\p@ \@minus 0.5\p@
+              \parsep    \z@
+              \partopsep 0.5\p@ \@plus 0\p@ \@minus 0.5\p@
+              \itemsep \topsep}
+\def\@listiv {\leftmargin\leftmarginiv
+              \labelwidth\leftmarginiv
+              \advance\labelwidth-\labelsep}
+\def\@listv  {\leftmargin\leftmarginv
+              \labelwidth\leftmarginv
+              \advance\labelwidth-\labelsep}
+\def\@listvi {\leftmargin\leftmarginvi
+              \labelwidth\leftmarginvi
+              \advance\labelwidth-\labelsep}
+
+% create title
+\providecommand{\maketitle}{}
+\renewcommand{\maketitle}{%
+  \par
+  \begingroup
+    \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+    % for perfect author name centering
+    \renewcommand{\@makefnmark}{\hbox to \z@{$^{\@thefnmark}$\hss}}
+    % The footnote-mark was overlapping the footnote-text,
+    % added the following to fix this problem               (MK)
+    \long\def\@makefntext##1{%
+      \parindent 1em\noindent
+      \hbox to 1.8em{\hss $\m@th ^{\@thefnmark}$}##1
+    }
+    \thispagestyle{empty}
+    \@maketitle
+    \@thanks
+    \@notice
+  \endgroup
+  \let\maketitle\relax
+  \let\thanks\relax
+  \setcounter{footnote}{0}
+}
+
+% rules for title box at top of first page
+\newcommand{\@toptitlebar}{
+  \hrule height 4\p@
+  \vskip 0.25in
+  \vskip -\parskip%
+}
+\newcommand{\@bottomtitlebar}{
+  \vskip 0.29in
+  \vskip -\parskip
+  \hrule height 1\p@
+  \vskip 0.09in%
+}
+
+% create title (includes both anonymized and non-anonymized versions)
+\providecommand{\@maketitle}{}
+\renewcommand{\@maketitle}{%
+  \vbox{%
+    \hsize\textwidth
+    \linewidth\hsize
+    \vskip 0.1in
+    \@toptitlebar
+    \centering
+    {\LARGE\bf \@title\par}
+    \@bottomtitlebar
+    \if@voyagernoauthor
+    % No author provided
+    \else
+      \if@voyageranonymous
+        \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}%
+          Anonymous~Author(s)%
+        \end{tabular}%
+      \else
+        \def\And{%
+          \end{tabular}\hfil\linebreak[0]\hfil%
+          \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+        }
+        \def\AND{%
+          \end{tabular}\hfil\linebreak[4]\hfil%
+          \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+        }
+        \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\@author\end{tabular}%
+      \fi
+      \vskip 0.3in \@minus 0.1in
+    \fi
+  }
+}
+
+% add notice to bottom of first page
+\newcommand{\ftype@noticebox}{8}
+\newcommand{\@notice}{%
+  \if@voyagernonotice\else
+    % give a bit of extra room back to authors on first page
+    \enlargethispage{2\baselineskip}%
+    \@float{noticebox}[b]%
+      \footnotesize
+      \if@voyagerinfo
+        \@voyagerstring\\
+      \fi
+      \@wipstring\@noticestring%
+    \end@float%
+  \fi
+}
+
+% abstract styling
+\renewenvironment{abstract}%
+{%
+  \vskip 0.075in%
+  \centerline%
+  {\large\bf Abstract}%
+  \vspace{0.5ex}%
+  \begin{quote}%
+}
+{
+  \par%
+  \end{quote}%
+  \vskip 1ex%
+}
+
+\endinput

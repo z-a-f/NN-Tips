@@ -1,0 +1,140 @@
+%!TEX root = ../main.tex
+\section{Workflow}
+\label{sec:workflow}
+{\em This list is inspired by Fran\c{c}ois Chollet \cite{Chollet:2017:DLP:3203489}.}
+In general, you want to stick to the following workflow:
+\begin{enumerate}
+
+\item {\bf Define the problem and assemble a dataset.}
+In fact, make sure these two statements are true:
+ \begin{itemize}
+ \item Your output can be predicted given your inputs
+ \item Your available data is sufficiently informative to learn the  relationship between input and output.
+ \end{itemize}
+
+\item {\bf Choose your figure-of-merit.}
+You can find a lot of different metrics on Kaggle \cite{kaggle}.
+Here are just a few I found in a 2 minute skim through there:
+\begin{center}
+\begin{tabular}{ l l}
+ Problem & Metric \\
+ \hline
+ Balanced classification & Accuracy, ROC AUC \\
+ Imbalanced classification & Precision, Recall, F1 \\
+ Ranking or multilabel class. & Mean average precision \\
+ Regression & Mean squared error \\
+ Image masking & intersection over union
+\end{tabular}
+\end{center}
+
+\item {\bf Choose the evaluation for your current progress.}
+In most cases one of the following three would work:
+ \begin{enumerate}
+ \item If you have a lot of data keep a {\em hold-out validation set} -- just set aside portion of your data to validate on.
+ \item If you don't have a lot of data, use {\em K-fold cross-validation} -- split the data into $K$ parts, train on $K-1$, and validate on the remained one.
+ Repeat $K$ times and average the results.
+ \item If you need highly accurate model evaluation, try {\em iterated cross-validation} -- apply K-fold validation $P$ times, while shuffling the data every time.
+ This might be very slow, as it requires $P\times K$ training iterations.
+ \end{enumerate}
+
+\item {\bf Prepare your data.} {\em Better data is better than better algorithms.} Make sure your data is properly selected, clean, and standardized. I usually follow these steps:
+    \begin{enumerate}
+    \item {\bf Select proper data.} Look through your data. If there is something you wish you had, but you don't have it -- try getting it.
+    If there is some data in the data that is irrelevant -- remove it. Removing is easier than getting the new data :)
+
+    Whenever you exclude or include the data, try documenting why you decided to remove/add it into the set.
+    \item {\bf Preprocess the data.}
+    There are a lot of things you can do here. Below is the list I usually look out for (definitely not exhaustive).
+        \begin{itemize}
+        \item[$\square$] Remove unwanted observations: duplicates, irrelevant points
+        \item[$\square$] Fix parsing errors: typos, inconsistent capitalizastion, mislabeled classes
+        \item[$\square$] Remove {\em unwanted} outliers.
+        Don't do it unless you are absolutely sure -- removing outliers generally improves your performance, but outliers are the most interesting points!
+        With the outliers I usually follow the rule ``Innocent until proven guilty''.
+        \item[$\square$] Handle missing data. Sometimes ``missingness'' is also information! Here is what I usually do:
+        For the {\em categorical data} add a new class, say ``Missing'', and mark the data points as such.
+        For the {\em numeric data} create an indicator variable to flag the value as missing.
+        Set the value to zero.
+        \end{itemize}
+    \item{\bf Transform the data.}
+        \begin{itemize}
+        \item[$\square$] Standardize your data. This involves centering your data around zero and scaling the data to some common range (i.e. $[-1, 1]$ or $[0, 1]$).
+        \item[$\square$] Decompose and Combine your data.
+        Some features can be split (i.e. split ``day and time'' into separate ``day'' and ``time'').
+        Other features could be combined.
+        \end{itemize}
+    \end{enumerate}
+
+\item {\bf Make some choices about the configurations.}
+Make sure your model has {\em statistical power}\footnote{Beats dumb baseline, s.a. random guessing.}.
+Before you build a good model, you have to make some choices:
+\begin{enumerate}
+\item {\bfseries\em Type of network to use}.
+Your architecture will depend on the nature of your task.
+You can start with the following table that is based on your dataset or problem
+\begin{center}
+\begin{tabular}{ l l}
+ Dataset/Problem & Type of network \\
+ \hline
+ Generic 2D/3D images & Non-densely connected 2D/3D CNN \\
+ Data requiring very deep nets & Densely connected CNN\footnotemark \\
+ Timeseries and temporal data & RNN \\
+ Language processing & RNN or 1D CNN \\
+ Other sequence data & 1D CNN \\
+ Decision making and action prediction & Deep-Q network (CNN + reinforcement)
+\end{tabular}
+\end{center}
+\footnotetext{Also, my personal experiments have shown that ResNet works much better for sparse 3D data from LiDARs.}
+\item {\bfseries\em Network size.}
+This one is really hard, and I usually start small, overfit, grow.
+However, there are some rules of thumb that you can follow\footnote{There is some theory that you can follow as well \cite{wiki:vc}.}.
+    \begin{itemize}
+    \item The first layers should be directly proportional to the input dimensionality.
+    \item Larger networks will always work better, but require stronger regularization.
+    \item It is better to use feature extraction (convolution) in the first layers, unless you are working with NLP.
+    \item Number of filters has diminishing returns.
+    \item Visualization with small batches helps a lot with determining good starting network size.
+    % \item I usually follow this equation for the test error ($\varepsilon_\text{test}$) and train error ($\varepsilon_\text{train}$) comparison
+    % \begin{align*}
+    %     \varepsilon_\text{train} &\le \varepsilon_\text{test} \le \varepsilon_\text{train} + O\left({-\frac{D}{N}\log{\frac{D}{N}}}\right) \\
+    %     D &\ll N
+    % \end{align*}
+    \end{itemize}
+\item {\bfseries\em Optimization configuration}.
+Start with \verb+rmsprop+\cite{Tieleman2012} if you don't know which one to choose.
+\item {\bfseries\em Last layer activation} and {\bfseries\em loss function}.
+Here is a rough starting point you can use:
+\begin{center}
+\begin{tabular}{ l l l}
+ Problem & Last layer activation & Loss function \\
+ \hline
+ Binary classification & Sigmoid & Cross-entropy (binary) \\
+ Multiclass, single-label class. & Softmax & Cross-entropy (categorical) \\
+ Multiclass, multi-label class. & Sigmoid & Cross-entropy (binary) \\
+ Regression & {\bf None} & MSE \\
+ Regression between 0 and 1 & Sigmoid & MSE, Cross-entropy (binary)
+\end{tabular}
+\end{center}
+\end{enumerate}
+
+\item {\bf Build your model and scale up.}
+Remember to start small, and grow as you go.
+Here is what I usually do:
+ \begin{enumerate}
+ \item Create a simple model (e.g. single layer network), and train it using small all-zero batch. This is good to make sure your wiring is correct.
+ \item Make the model slightly more complex (e.g. add the convolutions, activations, regularizations, etc.), and train it using all-zero data.
+ At this moment, if the loss is slowly going down -- I know my initialization is off.
+ Initialization that is too large an interval can make some neurons have too much influence over the network behavior.
+ \item Retrain the model using a small batch of real data.
+ My goal is to make sure the model overfits.
+ That tells me the model is sufficiently powerful to memorize the data.
+ \item Scale the model up while scaling the amount of data it is trained on.
+ I usually follow the rules:
+  \begin{itemize}
+  \item If the model under-fits, it is not complex enough;
+  \item If the model over-fits, it is too complex or it is time to add more data;
+  \item Deeper networks learn more abstractions, but are much harder to train;
+  \item Wider networks have diminishing returns -- within the same layer there is a huge difference between four and eight convolution filters, but there is almost no difference between a 128 and 256.
+  \end{itemize}
+ \end{enumerate}
+\end{enumerate}

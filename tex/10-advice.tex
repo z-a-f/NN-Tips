@@ -1,0 +1,161 @@
+%!TEX root = ../main.tex
+\section{Collection of (not so) obvious advice}
+\label{sec:advice}
+
+This is a collection of common wisdom that applies to building ML algorithms and neural networks in particular.
+The list is definitely not exhaustive, and mostly gathered by surfing Twitter \cite{twitter:karpathy:nn:300618}, asking gazillion question on StackOverflow \cite{se:stats:sycorax:nn-no-learn}, going through blogs \cite{byu:pcc:advice} and through countless sleepless nights.
+
+\subsection{For all networks}
+
+\subsubsection*{If it doesn't work -- try something else.}
+Fundamentally, neural networks take lots of {\bf experimentation} to get things to work.
+If what you are doing is not getting you what you want, consider going back to the drawing board or make some changes.
+But before that perform some basic checks:
+\begin{itemize}
+\item Write unittests; check for obvious bugs
+\item Check your initialization of the weights
+\item Make sure your learning rate is not too high / too low
+\end{itemize}
+
+\subsubsection*{Keep a logbook of what you are doing!}
+% This one bit me so many times, and I still keep on making this mistake: a really cool idea comes to mind and you spend several hours implementing it.
+% Somewhere around 3am you finally get the results which show no improvement.
+% At that moment, you also remember that you ran a similar experiment several weeks ago -- what a bummer!
+
+An ideal log-book would have information about the architecture, how many epochs it took to overfit/converge, accuracy and loss (training/validation/test), and any notes for your future self.
+I know this is tedious, but trust me, being organized that way pays off.
+
+% Don't hard-code your network.
+% Instead, create a configuration file that is read and used to populate all the details at run-time.
+% Don't delete any of the configuration files -- even if you think the changes are ``insignificant'', create a new configuration file.
+% Also, keep track of all of the per-epoch losses for training and validation within the configuration file (e.g. comments).
+
+This serves multiple purposes: 1) Prevents you from making the same mistake; 2) Allows you to review past experiments; 3) Let's you track the progress and dynamics of the project.
+
+% \subsubsection*{Do not (fully) train your network if you can avoid it!}
+% There are a lot of architectures on the market right now that are already pre-trained and ready to go.
+% Why not using those?
+% % Suppose you have a cool new idea -- classifying which lane on 101 freeway would a vehicle take.
+% Instead of building a network and training it from scratch -- why not taking an existing pre-trained network (i.e. VGG-16 \missingcitation) and using it as a feature extractor?
+% I know, I know, this is what they always teach us -- but why does everyone start from scratch every time then?
+
+\subsubsection*{My view on losses.}
+\begin{itemize}
+\item {\em Training} loss {\bf stuck} or {\bf oscillating}: Change the learning rate.
+\item {\em Training loss} {\bf going down} while {\em validation loss} is {\bf stuck}: the model is overfitting. Add regularization or more data.
+\item Both {\em Training} and {\em Validation} loss are {\bf low}, but the {\em Test} loss is {\bf high}: Model is overfitting the validation set. Change the validation set, reshuffle the data, use K-fold validation, or nuke your model and start anew :)
+\end{itemize}
+
+\subsubsection*{First train with all-zero data.}
+If you start by training on all-zero data, you can catch simple wiring bugs early on.
+In addition to that, if you zero data training produces nice, smooth loss curve -- your initialization is wrong.
+
+\subsubsection*{Start with a small network and a small batch of data.}
+Before improving your model, try overfitting a single batch first.
+In fact, grow your model with your data.
+Create a baseline model, overfit it using small batch, keep adding more data until you start under-fitting, make model more complex, rinse and repeat.
+
+Another problem associated with starting with complex models is long turn-arounds.
+Imagine you have a model with an SSD bounding box detector that crops images and pushes them into an LSTM to combine everything for tracking.
+Just initializing such a model would take 5-10 minutes on a GPU (I got this from \cite{twitter:karpathy:nn:300618} and actually tested it).
+Prototyping such a model is a nightmare!!!
+
+\subsubsection*{Make sure that your initial classification loss starts at $\ln N_\text{classes}$}
+Remember, if your model is not trained, its log-loss should always be $\ln N_\text{classes}$.
+This is a simple math and it works no matter what your real distribution of the data is:
+\begin{align*}
+L_\text{log} &= \frac{1}{N}\sum_{n=1}^{N}\sum_{k=1}^{K}-y_k^{(n)}\ln\hat{y}_k^{(n)} \\
+\sum_{k=1}^{K}y_k^{(\cdot)} &= 1 \\
+\text{Initially } \hat{y}_i^{(\cdot)} = \hat{y}_j^{(\cdot)} &= 1/K, \forall{i,j}\\
+\Rightarrow L_\text{log}^\text{initial} &= \ln{K}
+\end{align*}
+
+\subsubsection*{Check if your loss gets correct feed.}
+Don't route \verb+softmax+ outputs to a loss that expects raw logits.
+
+\subsubsection*{Design-for-Debug: Generalize your model well.}
+Make sure you design your system with debugging in mind.
+For example, if you have a recurrent network, and you only need a single prediction, just output predictions at each step.
+That way you can debug it.
+Without generalizing your model it is very hard to find intermediate issues.
+For some networks you would need to look deep inside their layers -- I guess for simple networks you TensorBoard can help \cite{tensorflow2015-whitepaper}.
+
+\subsubsection*{Tripple-check your data augmentation.}
+This is actually about all pre-processing.
+\begin{itemize}
+\item Make sure you augment the copy of the image not the image itself;
+\item Make sure your augmentation is reasonable and realistic;
+\item If labels depend on orientation -- don't forget to change the labels as well. I made this mistake when I was training the turn angle using a camera feed. Was augmenting the data by using horizontal flips, but forgot to change the steering angle *facepalm*.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%
+
+\subsubsection*{Overfitting / Underfitting}
+No need to explain that -- just keep track of your trainin/validation losses.
+Often times tuning the hyperparameters is a process when you constantly look at the loss plots :)
+
+\subsubsection*{Dropout, Normalization, and Clipping}
+Use dropout, but not for the convolutional layers!
+Usually the dropout with the 50\% rate is good enough, but feel free to experiment :)
+
+Use batch normalization -- this reduces the covariance shift, and allows us to
+\begin{itemize}
+\item Use higher learning rates because batch normalization makes sure that there’s no activation that’s gone really high or really low.
+\item Slightly reduce overfitting because it has a slight regularization effects.
+\end{itemize}
+
+In addition to tracking your losses, you also might want to track your gradients.
+If you notice that the gradients are overshooting, it is often useful to clip them.
+Generally, applying the \texttt{L2 Norm Clipping} before applying them with your favorite optimizer helps with the {\bf Gradient Explosion Problem}.
+
+\subsection{For Generative Adversarial Networks}
+\subsubsection*{Activation Functions and Pooling}
+Avoid sparse gradients: instead of \verb+ReLU+ you should probably use \verb+LeakyReLU+.
+
+Same goes for the pooling -- \verb+MaxPool+ is the best, except the places where it's not: \verb+AveragePool+ is much better for the architectures which don't like sparse gradients.
+
+\subsubsection*{Normalization}
+It was shown that when you are trainign your discriminator, you should normalize the "real" and "fake" (generated) batches separately.
+Don't mix the "real" and "fake" data into the same batch.
+
+\subsubsection*{Optimizers}
+Use different optimization algorithms for your generator and your discriminator.
+For example you can use \verb+Adam+ for the generator, and \verb+SGD+ for the discriminator.
+
+\subsubsection*{Loss and Gradients}
+\begin{itemize}
+\item[\color{red!80!black}BAD] Discriminator loss is approaching zero.
+\item[\color{red!80!black}BAD] Gradient norms are oscillating or blowing to infinity.
+\item[\color{red!80!black}BAD] Generator loss is steadily going down (discriminator is being fooled!!!)
+\item[\color{green!60!black}GOOD] Discriminator loss has low variance and slowly going down.
+\end{itemize}
+
+\subsubsection*{Generator vs. Discriminator Ratio}
+So far I didn't see anyone being able to answer conclusively -- what is the balance between the generator and discriminator usage during training.
+
+\subsection{For Reinforcement Learning}
+Just use the {\bf Rainbow}\cite{hessel:arxiv:2017}
+\zafar{This section is a stub}
+
+\subsection{For Recurrent Networks}
+
+\subsubsection*{Don't shuffle your data}
+Everyone forgets about this one.
+You cannot shuffle the data when working with the recurrent networks (unless you know what you are doing).
+
+\subsubsection*{Clip your gradients}
+Although this is optional for generic networks, for RNNs you most probably need to clip your gradients.
+
+\subsubsection*{Normalize your loss}
+The loss should be averaged across the batch.
+Sum up your loss, and nomalize it by the sequence length.
+This will allow the losses to be of comparable magnitude.
+
+\subsubsection*{Use feed-forward as the first layer}
+Although that's not what you usually see, it is worth trying to add a feed-forward layer or two first.
+This will transform the input sequence into more ``digestable'' dimensions.
+
+\subsubsection*{Use ``ResNet''-like architectures}
+Recurrent networks need a lot of parameters.
+To resolve it, stack several smaller recurrent layers and sum the outputs of multiple layers in the end (just like ResNet).
+

@@ -1,0 +1,42 @@
+\documentclass{article}
+
+% \usepackage[public,nonatbib,lineno,wip]{voyager}
+\usepackage[public,nonatbib,nonotice]{voyager}
+
+% Default packages.
+\usepackage[sorting=none, giveninits=true, maxnames=10]{biblatex}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypograph
+
+\newcommand{\zafar}[1]{{\color{red}[Zafar: #1]}}
+\newcommand{\missingcitation}[1][?]{{\color{red}[#1]}}
+
+\input{config}
+\input{tex/00-preamble}
+
+%% Bibliography in `biblatex' goes before the document.
+\bibliography{main}
+\begin{document}
+% \input{tex/01-introduction}
+% \newpage
+\maketitle
+\input{tex/20-workflow}
+% \input{tex/30-lookout}
+\input{tex/10-advice}
+
+\nocite{danijar:recur-tips}
+\printbibliography
+
+\appendix
+% \newpage\input{tex/a00-appendix_about_stuff}
+% \newpage\input{tex/a10-appendix_about_some_other_stuff}
+% \newpage\input{tex/99-acknowledgements}
+
+% \input{tex/999-skeleton}
+\end{document}

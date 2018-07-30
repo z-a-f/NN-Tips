@@ -1,0 +1,20 @@
+%!TEX root = ../main.tex
+\section*{Skeleton}
+
+Common mistakes by Andrej Karpathy:
+
+\begin{enumerate}
+\item You didn't try to overfit a single batch first. This is a quick sanity check of your wiring: if you cannot overfit a single batch -- there is a bug in your network! Start with a small model and small amount of data and grow them together. You can also train on all zero data first to see what loss you get with the base output distribution, then gradually include more inputs and scale up the network, making sure you improve every time. If using zero data produces a nice decaying loss curve, this usually means you initialization is not very clever.
+\item You forgot to toggle train/eval mode for the net
+\item If using PyTorch  -- you forgot the \verb+.zero_grad()+ before \verb+.backward()+
+\item You routed \verb+softmax+ outputs to a loss that expects raw logits
+\item You didn't use bias=False for the linear/Conv2d layer when using BatchNorm or forgot to include it for the output layer.
+\item Tweak the final layer biases to be close to base distribution. Just make sure you don't overfit.
+\item Interchanging \verb+view()+ is the same as \verb+permute()+. PyTorch's \verb+view()+ function reads from the last dimension first and fills it first too. Thus, you might be sending the wrong input, but the error will not be shown because dimensions are right.
+\item You forgot to convert \verb+float()+ after comparison of tensors and summing on ByteTensors that have a bbuffer of 255 and zero out after that.
+\item Didn't check if the loss started at $\ln{N_{classes}}$
+\item Didn't check if $\mu, \sigma$ of the train/test/validation is close enough.
+\item Your image augmentation is not reasonable (check preprocessing)
+\item Not shuffling every batch. Shuffling every batch for series.
+\item Not checking if stronger regularization increases the loss
+\end{enumerate}
