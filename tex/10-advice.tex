@@ -60,8 +60,8 @@ Imagine you have a model with an SSD bounding box detector that crops images and
 Just initializing such a model would take 5-10 minutes on a GPU (I got this from \cite{twitter:karpathy:nn:300618} and actually tested it).
 Prototyping such a model is a nightmare!!!
 
-\subsubsection*{Make sure that your initial classification loss starts at $\ln N_\text{classes}$}
-Remember, if your model is not trained, its log-loss should always be $\ln N_\text{classes}$.
+\subsubsection*{Make sure that your initial classification loss starts at $\ln K_\text{classes}$}
+Remember, if your model is not trained, its log-loss should always be $\ln K_\text{classes}$.
 This is a simple math and it works no matter what your real distribution of the data is:
 \begin{align*}
 L_\text{log} &= \frac{1}{N}\sum_{n=1}^{N}\sum_{k=1}^{K}-y_k^{(n)}\ln\hat{y}_k^{(n)} \\
