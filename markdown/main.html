@@ -1,0 +1,1325 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body {
+  max-width: 980px;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 45px;
+}
+
+@font-face {
+  font-family: fontawesome-mini;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body b,
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body sub,
+.markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.markdown-body sup {
+  top: -0.5em;
+}
+.markdown-body sub {
+  bottom: -0.25em;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body .codehilitetable {
+  border: 0;
+  border-spacing: 0;
+}
+
+.markdown-body .codehilitetable tr {
+  border: 0;
+}
+
+.markdown-body .codehilitetable pre,
+.markdown-body .codehilitetable div.codehilite {
+  margin: 0;
+}
+
+.markdown-body .linenos,
+.markdown-body .code,
+.markdown-body .codehilitetable td {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-body td:not(.linenos) .linenodiv {
+  padding: 0 !important;
+}
+
+.markdown-body .code {
+  width: 100%;
+}
+
+.markdown-body .linenos div pre,
+.markdown-body .linenodiv pre,
+.markdown-body .linenodiv {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.markdown-body .code div pre,
+.markdown-body .code div {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before,
+.markdown-body hr:after {
+  display: table;
+  content: " ";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .headerlink {
+  font: normal 400 16px fontawesome-mini;
+  vertical-align: middle;
+  margin-left: -16px;
+  float: left;
+  display: inline-block;
+  text-decoration: none;
+  opacity: 0;
+  color: #333;
+}
+
+.markdown-body .headerlink:focus {
+  outline: none;
+}
+
+.markdown-body h1 .headerlink {
+  margin-top: 0.8rem;
+}
+
+.markdown-body h2 .headerlink,
+.markdown-body h3 .headerlink {
+  margin-top: 0.6rem;
+}
+
+.markdown-body h4 .headerlink {
+  margin-top: 0.2rem;
+}
+
+.markdown-body h5 .headerlink,
+.markdown-body h6 .headerlink {
+  margin-top: 0;
+}
+
+.markdown-body .headerlink:hover,
+.markdown-body h1:hover .headerlink,
+.markdown-body h2:hover .headerlink,
+.markdown-body h3:hover .headerlink,
+.markdown-body h4:hover .headerlink,
+.markdown-body h5:hover .headerlink,
+.markdown-body h6:hover .headerlink {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body .admonition {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code,
+.markdown-body samp {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .codehilite {
+  margin-bottom: 16px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .codehilite pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+/* Admonition */
+.markdown-body .admonition {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #333;
+  padding: 10px 10px 10px 30px;
+}
+
+.markdown-body .admonition table {
+  color: #333;
+}
+
+.markdown-body .admonition p {
+  padding: 0;
+}
+
+.markdown-body .admonition-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.markdown-body .admonition>.admonition-title {
+  color: #333;
+}
+
+.markdown-body .attention>.admonition-title {
+  color: #a6d796;
+}
+
+.markdown-body .caution>.admonition-title {
+  color: #d7a796;
+}
+
+.markdown-body .hint>.admonition-title {
+  color: #96c6d7;
+}
+
+.markdown-body .danger>.admonition-title {
+  color: #c25f77;
+}
+
+.markdown-body .question>.admonition-title {
+  color: #96a6d7;
+}
+
+.markdown-body .note>.admonition-title {
+  color: #d7c896;
+}
+
+.markdown-body .admonition:before,
+.markdown-body .attention:before,
+.markdown-body .caution:before,
+.markdown-body .hint:before,
+.markdown-body .danger:before,
+.markdown-body .question:before,
+.markdown-body .note:before {
+  font: normal normal 16px fontawesome-mini;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body .admonition:before {
+  content: "\f056\00a0";
+  color: 333;
+}
+
+.markdown-body .attention:before {
+  content: "\f058\00a0";
+  color: #a6d796;
+}
+
+.markdown-body .caution:before {
+  content: "\f06a\00a0";
+  color: #d7a796;
+}
+
+.markdown-body .hint:before {
+  content: "\f05a\00a0";
+  color: #96c6d7;
+}
+
+.markdown-body .danger:before {
+  content: "\f057\00a0";
+  color: #c25f77;
+}
+
+.markdown-body .question:before {
+  content: "\f059\00a0";
+  color: #96a6d7;
+}
+
+.markdown-body .note:before {
+  content: "\f040\00a0";
+  color: #d7c896;
+}
+
+.markdown-body .admonition::after {
+  content: normal;
+}
+
+.markdown-body .attention {
+  border-left: 6px solid #a6d796;
+}
+
+.markdown-body .caution {
+  border-left: 6px solid #d7a796;
+}
+
+.markdown-body .hint {
+  border-left: 6px solid #96c6d7;
+}
+
+.markdown-body .danger {
+  border-left: 6px solid #c25f77;
+}
+
+.markdown-body .question {
+  border-left: 6px solid #96a6d7;
+}
+
+.markdown-body .note {
+  border-left: 6px solid #d7c896;
+}
+
+.markdown-body .admonition>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body .admonition>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* progress bar*/
+.markdown-body .progress {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 24px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ededed;
+  position: relative;
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
+}
+
+.markdown-body .progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; margin: 0;
+  line-height: 24px;
+  color: #333;
+  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
+  -webkit-font-smoothing: antialiased !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.markdown-body .progress-bar {
+  height: 24px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #96c6d7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(
+    135deg, rgba(255, 255, 255, .4) 27%,
+    transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%,
+    transparent 77%, transparent
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+}
+
+.markdown-body .progress-100plus .progress-bar {
+  background-color: #a6d796;
+}
+
+.markdown-body .progress-80plus .progress-bar {
+  background-color: #c6d796;
+}
+
+.markdown-body .progress-60plus .progress-bar {
+  background-color: #d7c896;
+}
+
+.markdown-body .progress-40plus .progress-bar {
+  background-color: #d7a796;
+}
+
+.markdown-body .progress-20plus .progress-bar {
+  background-color: #d796a6;
+}
+
+.markdown-body .progress-0plus .progress-bar {
+  background-color: #c25f77;
+}
+
+.markdown-body .candystripe-animate .progress-bar{
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  animation: animate-stripes 3s linear infinite;
+}
+
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.markdown-body .gloss .progress-bar {
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, .7),
+    inset 0 -12px 0 rgba(0, 0, 0, .05);
+}
+
+/* Multimarkdown Critic Blocks */
+.markdown-body .critic_mark {
+  background: #ff0;
+}
+
+.markdown-body .critic_delete {
+  color: #c82829;
+  text-decoration: line-through;
+}
+
+.markdown-body .critic_insert {
+  color: #718c00 ;
+  text-decoration: underline;
+}
+
+.markdown-body .critic_comment {
+  color: #8e908c;
+  font-style: italic;
+}
+
+.markdown-body .headeranchor {
+  font: normal normal 16px fontawesome-mini;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.headeranchor:before {
+  content: '\e157';
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  .markdown-body {
+    font-size:14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .markdown-body {
+    font-size:16px;
+  }
+}
+
+@media print {
+  .markdown-body * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+    -ms-filter: none !important;
+  }
+
+  .markdown-body {
+    font-size:12pt;
+    max-width:100%;
+    outline:none;
+    border: 0;
+  }
+
+  .markdown-body a,
+  .markdown-body a:visited {
+    text-decoration: underline;
+  }
+
+  .markdown-body .headeranchor-link {
+    display: none;
+  }
+
+  .markdown-body a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .markdown-body abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .markdown-body .ir a:after,
+  .markdown-body a[href^="javascript:"]:after,
+  .markdown-body a[href^="#"]:after {
+    content: "";
+  }
+
+  .markdown-body pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .markdown-body pre,
+  .markdown-body blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body .progress,
+  .markdown-body .progress-bar {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .markdown-body .progress {
+    border: 1px solid #ddd;
+  }
+
+  .markdown-body .progress-bar {
+    height: 22px;
+    border-right: 1px solid #ddd;
+  }
+
+  .markdown-body tr,
+  .markdown-body img {
+    page-break-inside: avoid;
+  }
+
+  .markdown-body img {
+    max-width: 100% !important;
+  }
+
+  .markdown-body p,
+  .markdown-body h2,
+  .markdown-body h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body h2,
+  .markdown-body h3 {
+    page-break-after: avoid;
+  }
+}
+</style><style>/*github*/
+.codehilite {background-color:#fff;color:#333333;}
+.codehilite .hll {background-color:#ffffcc;}
+.codehilite .c{color:#999988;font-style:italic}
+.codehilite .err{color:#a61717;background-color:#e3d2d2}
+.codehilite .k{font-weight:bold}
+.codehilite .o{font-weight:bold}
+.codehilite .cm{color:#999988;font-style:italic}
+.codehilite .cp{color:#999999;font-weight:bold}
+.codehilite .c1{color:#999988;font-style:italic}
+.codehilite .cs{color:#999999;font-weight:bold;font-style:italic}
+.codehilite .gd{color:#000000;background-color:#ffdddd}
+.codehilite .ge{font-style:italic}
+.codehilite .gr{color:#aa0000}
+.codehilite .gh{color:#999999}
+.codehilite .gi{color:#000000;background-color:#ddffdd}
+.codehilite .go{color:#888888}
+.codehilite .gp{color:#555555}
+.codehilite .gs{font-weight:bold}
+.codehilite .gu{color:#800080;font-weight:bold}
+.codehilite .gt{color:#aa0000}
+.codehilite .kc{font-weight:bold}
+.codehilite .kd{font-weight:bold}
+.codehilite .kn{font-weight:bold}
+.codehilite .kp{font-weight:bold}
+.codehilite .kr{font-weight:bold}
+.codehilite .kt{color:#445588;font-weight:bold}
+.codehilite .m{color:#009999}
+.codehilite .s{color:#dd1144}
+.codehilite .n{color:#333333}
+.codehilite .na{color:teal}
+.codehilite .nb{color:#0086b3}
+.codehilite .nc{color:#445588;font-weight:bold}
+.codehilite .no{color:teal}
+.codehilite .ni{color:purple}
+.codehilite .ne{color:#990000;font-weight:bold}
+.codehilite .nf{color:#990000;font-weight:bold}
+.codehilite .nn{color:#555555}
+.codehilite .nt{color:navy}
+.codehilite .nv{color:teal}
+.codehilite .ow{font-weight:bold}
+.codehilite .w{color:#bbbbbb}
+.codehilite .mf{color:#009999}
+.codehilite .mh{color:#009999}
+.codehilite .mi{color:#009999}
+.codehilite .mo{color:#009999}
+.codehilite .sb{color:#dd1144}
+.codehilite .sc{color:#dd1144}
+.codehilite .sd{color:#dd1144}
+.codehilite .s2{color:#dd1144}
+.codehilite .se{color:#dd1144}
+.codehilite .sh{color:#dd1144}
+.codehilite .si{color:#dd1144}
+.codehilite .sx{color:#dd1144}
+.codehilite .sr{color:#009926}
+.codehilite .s1{color:#dd1144}
+.codehilite .ss{color:#990073}
+.codehilite .bp{color:#999999}
+.codehilite .vc{color:teal}
+.codehilite .vg{color:teal}
+.codehilite .vi{color:teal}
+.codehilite .il{color:#009999}
+.codehilite .gc{color:#999;background-color:#EAF2F5}
+</style><title>main</title></head><body><article class="markdown-body"><h1 id="practical-advice-for-building-neural-networks">Practical Advice for Building Neural Networks<a class="headerlink" href="#practical-advice-for-building-neural-networks" title="Permanent link"></a></h1>
+<p><em>Revision <strong>1.0</strong>.</em>
+<em>Thanks for suggestions and reviews: <strong>Tao Huang</strong>, <strong>Yun Jiang</strong>, <strong>François Chollet</strong></em> </p>
+<h2 id="1-workflow">1. Workflow<a class="headerlink" href="#1-workflow" title="Permanent link"></a></h2>
+<p>This list is inspired by François Chollet <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/isbnsearch.org/isbn/9781617294433%5D" title="F. Chollet. Deep Learning with Python. 1st. Greenwich, CT, USA: Manning Publications Co., 2017. ISBN: 1617294438, 9781617294433.">[1]</a>. In general, you want to stick to the following workflow:</p>
+<h3 id="define-the-problem-and-assemble-a-dataset">Define the problem and assemble a dataset.<a class="headerlink" href="#define-the-problem-and-assemble-a-dataset" title="Permanent link"></a></h3>
+<p>In fact, make sure these two statements are
+true:
+  - Your output can be predicted given your inputs
+  - Your available data is sufficiently informative to learn the relationship between input and output.</p>
+<h3 id="choose-your-figure-of-merit">Choose your figure-of-merit.<a class="headerlink" href="#choose-your-figure-of-merit" title="Permanent link"></a></h3>
+<p>You can find a lot of different metrics on Kaggle <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/www.kaggle.com%5D" title="Kaggle. https://www.kaggle.com. Accessed: 03-July-2018.">[2]</a>. Here are just a few I found in a 2 minute skim through there:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Problem</th>
+<th align="left">Metric</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Balanced classification</td>
+<td align="left">Accuracy, ROC AUC</td>
+</tr>
+<tr>
+<td align="left">Imbalanced classification</td>
+<td align="left">Precision, Recall, F1</td>
+</tr>
+<tr>
+<td align="left">Ranking or multilabel classification</td>
+<td align="left">Mean average precision</td>
+</tr>
+<tr>
+<td align="left">Regression</td>
+<td align="left">Mean squared error</td>
+</tr>
+<tr>
+<td align="left">Image masking</td>
+<td align="left">Intersection over union</td>
+</tr>
+</tbody>
+</table>
+<h3 id="choose-the-evaluation-for-your-current-progress">Choose the evaluation for your current progress.<a class="headerlink" href="#choose-the-evaluation-for-your-current-progress" title="Permanent link"></a></h3>
+<p>In most cases one of the following three would work:</p>
+<ol>
+<li>If you have a lot of data keep a hold-out validation set – just set aside portion of your data to validate on.</li>
+<li>If you don’t have a lot of data, use K-fold cross-validation – split the data into K parts, train on K − 1, and validate on the remained one. Repeat K times and average the results.</li>
+<li>If you need highly accurate model evaluation, try iterated cross-validation – apply K-fold validation P times, while shuffling the data every time. This might be very slow, as it requires P × K training iterations.</li>
+</ol>
+<h3 id="prepare-your-data">Prepare your data<a class="headerlink" href="#prepare-your-data" title="Permanent link"></a></h3>
+<p>Better data is better than better algorithms. Make sure your data is properly selected, clean, and standardized. I usually follow these steps:</p>
+<ol>
+<li><strong>Select proper data.</strong> Look through your data. If there is something you wish you had, but you don’t have it – try getting it. If there is some data in the data that is irrelevant – remove it. Removing is easier than getting the new data :)
+Whenever you exclude or include the data, try documenting why you decided to remove/add it into the set.</li>
+<li>
+<p><strong>Preprocess the data.</strong> There are a lot of things you can do here. Below is the list I usually look out for (definitely not exhaustive).</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> Remove unwanted observations: duplicates, irrelevant points</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Fix parsing errors: typos, inconsistent capitalizastion, mislabeled classes</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Remove <em>unwanted</em> outliers. Don’t do it unless you are absolutely sure – removing outliers generally improves your performance, but outliers are the most interesting points! With the outliers I usually follow the rule “Innocent until proven guilty”.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Handle missing data. Sometimes “missingness” is also information! Here is what I usually do: For the <em>categorical data</em> add a new class, say “Missing”, and mark the data points as such. For the <em>numeric data</em> create an indicator variable to flag the value as missing. Set the value to zero.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transform the data.</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> Standardize your data. This involves centering your data around zero and scaling the data to some common range (i.e. [−1, 1] or [0, 1]).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Decompose and Combine your data. Some features can be split (i.e. split “day and time” into separate “day” and “time”). Other features could be combined.</li>
+</ul>
+</li>
+</ol>
+<h3 id="make-some-choices-about-the-configurations">Make some choices about the configurations<a class="headerlink" href="#make-some-choices-about-the-configurations" title="Permanent link"></a></h3>
+<p>Make sure your model has <em>statistical power</em> (beats dumb baseline, s.a. random guessing). Before you build a good model, you have to make some choices:</p>
+<ul>
+<li><strong>Type of network to use.</strong> Your architecture will depend on the nature of your task. You can start with the following table that is based on your dataset or problem</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Dataset/Problem</th>
+<th align="left">Type of network</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Generic 2D/3D images</td>
+<td align="left">Non-densely connected 2D/3D CNN</td>
+</tr>
+<tr>
+<td align="left">Data requiring very deep nets</td>
+<td align="left">Densely connected CNN<br/>IMHO: ResNet works much better for sparse 3D data from LiDARs</td>
+</tr>
+<tr>
+<td align="left">Timeseries and temporal data</td>
+<td align="left">RNN</td>
+</tr>
+<tr>
+<td align="left">Language processing</td>
+<td align="left">RNN or 1D CNN</td>
+</tr>
+<tr>
+<td align="left">Other sequence data</td>
+<td align="left">1D CNN</td>
+</tr>
+<tr>
+<td align="left">Decision making and action prediction</td>
+<td align="left">Deep-Q network (CNN + reinforcement)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Network size.</strong> This one is really hard, and I usually start small, overfit, grow. However, there are some rules of thumb that you can follow (there is some theory that you can follow as well <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/en.wikipedia.org/w/index.php?title=VC_dimension&oldid=846805558]" title="Wikipedia contributors. VC dimension — Wikipedia, The Free Encyclopedia. [Online; accessed 30-July-2018]. 2018. URL: https://en.wikipedia.org/w/index.php?title=VC_dimension&amp;oldid=846805558.">[3]</a>).<ul>
+<li>The first layers should be directly proportional to the input dimensionality.</li>
+<li>Larger networks will always work better, but require stronger regularization.</li>
+<li>It is better to use feature extraction (convolution) in the first layers, unless you are
+working with NLP.</li>
+<li>Number of filters has diminishing returns.</li>
+<li>Visualization with small batches helps a lot with determining good starting network
+size.</li>
+</ul>
+</li>
+<li><strong>Optimization configuration.</strong> Start with rmsprop<a href="/Users/zafar/Git/papers/nn-tips/markdown/%5B%5D" title="T. Tieleman and G. Hinton. Lecture 6.5—RmsProp: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural Networks for Machine Learning. 2012.">[4]</a> if you don’t know which one to choose.</li>
+<li><strong>Last layer activation and loss function.</strong> Here is a rough starting point you can use:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Problem</th>
+<th align="left">Last layer activation</th>
+<th align="left">Loss function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Binary classification</td>
+<td align="left">Sigmoid</td>
+<td align="left">Cross-entropy (binary)</td>
+</tr>
+<tr>
+<td align="left">Multiclass, single-label classification</td>
+<td align="left">Softmax</td>
+<td align="left">Cross-entropy (categorical)</td>
+</tr>
+<tr>
+<td align="left">Multiclass, multi-label classification</td>
+<td align="left">Sigmoid</td>
+<td align="left">Cross-entropy (binary)</td>
+</tr>
+<tr>
+<td align="left">Regression</td>
+<td align="left"><strong>None</strong></td>
+<td align="left">MSE</td>
+</tr>
+<tr>
+<td align="left">Regression between 0 and 1</td>
+<td align="left">Sigmoid</td>
+<td align="left">MSE, Cross-entropy (binary)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="build-your-model-and-scale-up">Build your model and scale up<a class="headerlink" href="#build-your-model-and-scale-up" title="Permanent link"></a></h3>
+<p>Remember to start small, and grow as you go. Here is what I usually do:</p>
+<ol>
+<li>Create a simple model (e.g. single layer network), and train it using small all-zero batch. This is good to make sure your wiring is correct.</li>
+<li>Make the model slightly more complex (e.g. add the convolutions, activations, regu- larizations, etc.), and train it using all-zero data. At this moment, if the loss is slowly going down – I know my initialization is off. Initialization that is too large an interval can make some neurons have too much influence over the network behavior.</li>
+<li>Retrain the model using a small batch of real data. My goal is to make sure the model overfits. That tells me the model is sufficiently powerful to memorize the data.</li>
+<li>Scale the model up while scaling the amount of data it is trained on. I usually follow the rules:
+- If the model under-fits, it is not complex enough;
+- If the model over-fits, it is too complex or it is time to add more data;
+- Deeper networks learn more abstractions, but are much harder to train;
+- Wider networks have diminishing returns – within the same layer there is a huge difference between four and eight convolution filters, but there is almost no difference between a 128 and 256.</li>
+</ol>
+<h2 id="2-collecation-of-not-so-obvious-advice">2. Collecation of (not so) obvious advice<a class="headerlink" href="#2-collecation-of-not-so-obvious-advice" title="Permanent link"></a></h2>
+<p>This is a collection of common wisdom that applies to building ML algorithms and neural networks in particular. The list is definitely not exhaustive, and mostly gathered by surfing Twitter <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/twitter.com/karpathy/status/1013244313327681536%5D" title="Twitter Users. Andrej Karpathy twitter thread: most common neural net mistakes... [On- line; accessed 03-July-2018]. 2018. URL: https://twitter.com/karpathy/status/1013244313327681536.">[5]</a>, asking gazillion question on StackOverflow <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/stats.stackexchange.com/q/352036%5D" title="Sycorax. What should I do when my neural network doesn’t learn? Cross Validated. [On-line; accessed 03-July-2018]. eprint: https://stats.stackexchange.com/q/352036. https://stats.stackexchange.com/users/22311/sycorax.">[6]</a>, going through blogs <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/pcc.cs.byu.edu/2017/10/02/practical-advice-for-building-deep-neural-networks/%5D" title="Matt H. and Daniel R. Practical Advice for Building Deep Neural Networks. [Online; accessed: 03-July-2018]. URL: https://pcc.cs.byu.edu/2017/10/02/practical-advice-for-building-deep-neural-networks/.">[7]</a> and through countless sleepless nights.</p>
+<h3 id="21-for-all-networks">2.1 For all networks<a class="headerlink" href="#21-for-all-networks" title="Permanent link"></a></h3>
+<ul>
+<li>
+<p><strong>If it doesn&rsquo;t work &ndash; try something else.</strong>
+Fundamentally, neural networks take lots of experimentation to get things to work. If what you are doing is not getting you what you want, consider going back to the drawing board or make some changes. But before that perform some basic checks:</p>
+<ul>
+<li>Write unittests; check for obvious bugs</li>
+<li>Check your initialization of the weights</li>
+<li>Make sure your learning rate is not too high / too low</li>
+</ul>
+</li>
+<li>
+<p><strong>Keep a logbook of what you are doing!</strong>
+An ideal log-book would have information about the architecture, how many epochs it took to overfit/converge, accuracy and loss (training/validation/test), and any notes for your future self. I know this is tedious, but trust me, being organized that way pays off.
+This serves multiple purposes: 1) Prevents you from making the same mistake; 2) Allows you to review past experiments; 3) Let’s you track the progress and dynamics of the project.</p>
+</li>
+<li><strong>My view on losses.</strong><ul>
+<li><em>Training</em> loss <strong>stuck</strong> or <strong>oscillating</strong>: Change the learning rate.</li>
+<li><em>Training</em> loss <strong>going down</strong> while <em>validation</em> loss is <strong>stuck</strong>: the model is overfitting. Add regularization or more data.</li>
+<li>Both <em>training</em> and <em>validation</em> loss are <strong>low</strong>, but the <em>test</em> loss is <strong>high</strong>: Model is overfitting the validation set. Change the validation set, reshuffle the data, use K-fold validation, or nuke your model and start anew :)</li>
+</ul>
+</li>
+<li><strong>First train with all-zero data.</strong>
+If you start by training on all-zero data, you can catch simple wiring bugs early on. In addition to that, if you zero data training produces nice, smooth loss curve – your initialization is wrong.</li>
+<li><strong>Start with a small network and a small batch of data.</strong>
+Before improving your model, try overfitting a single batch first. In fact, grow your model with your data. Create a baseline model, overfit it using small batch, keep adding more data until you start under-fitting, make model more complex, rinse and repeat.
+Another problem associated with starting with complex models is long turn-arounds. Imagine you have a model with an SSD bounding box detector that crops images and pushes them into an LSTM to combine everything for tracking. Just initializing such a model would take 5-10 minutes on a GPU (I got this from <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/twitter.com/karpathy/status/1013244313327681536%5D" title="Twitter Users. Andrej Karpathy twitter thread: most common neural net mistakes... [On- line; accessed 03-July-2018]. 2018. URL: https://twitter.com/karpathy/status/1013244313327681536.">[5]</a> and actually tested it). Prototyping such a model is a nightmare!!!</li>
+<li>__Make sure that your initial classification loss starts at $\ln{K_{classes}}$.__
+Remember, if your model is not trained, its log-loss should always be $\ln{K_{classes}}$. This is a simple math and it works no matter what your real distribution of the data is:
+$$
+\begin{align<em>}
+L_\text{log} &amp;= \frac{1}{N}\sum_{n=1}^{N}\sum_{k=1}^{K}-y_k^{(n)}\ln\hat{y}<em k="1">k^{(n)} \
+\sum</em>^{K}y_k^{(\cdot)} &amp;= 1 \
+\text{Initially } \hat{y}<em>i^{(\cdot)} = \hat{y}_j^{(\cdot)} &amp;= 1/K, \forall{i,j}\
+\Rightarrow L</em>\text{log}^\text{initial} &amp;= \ln{K}
+\end{align</em>}
+$$</li>
+<li><strong>Check if your loss gets correct feed.</strong>
+Don’t route softmax outputs to a loss that expects raw logits.</li>
+<li><strong>Design-for-Debug: Generalize your model well.</strong>
+Make sure you design your system with debugging in mind. For example, if you have a recurrent network, and you only need a single prediction, just output predictions at each step. That way you can debug it. Without generalizing your model it is very hard to find intermediate issues. For some networks you would need to look deep inside their layers – I guess for simple networks you TensorBoard can help <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/www.tensorflow.org/%5D" title="Martın Abadi et al. TensorFlow: Large-Scale Machine Learning on Heterogeneous Systems. Software available from tensorflow.org. 2015. URL: https://www.tensorflow.org/.">[8]</a>.</li>
+<li><strong>Tripple-check your data augmentation.</strong>
+This is actually about all pre-processing.<ul>
+<li>Make sure you augment the copy of the image not the image itself;</li>
+<li>Make sure your augmentation is reasonable and realistic;</li>
+<li>If labels depend on orientation – don’t forget to change the labels as well. I made this mistake when I was training the turn angle using a camera feed. Was augmenting the data by using horizontal flips, but forgot to change the steering angle <em>facepalm</em>.</li>
+</ul>
+</li>
+<li><strong>Overfitting / Underfitting</strong>
+No need to explain that – just keep track of your trainin/validation losses. Often times tuning the hyperparameters is a process when you constantly look at the loss plots :)</li>
+<li><strong>Dropout, Normalization, and Clipping</strong>
+Use dropout, but not for the convolutional layers! Usually the dropout with the 50% rate is good enough, but feel free to experiment :)
+Use batch normalization – this reduces the covariance shift, and allows us to<ul>
+<li>Use higher learning rates because batch normalization makes sure that there’s no activation that’s gone really high or really low.</li>
+<li>Slightly reduce overfitting because it has a slight regularization effects.
+In addition to tracking your losses, you also might want to track your gradients. If you notice that the gradients are overshooting, it is often useful to clip them. Generally, applying the L2 Norm Clipping before applying them with your favorite optimizer helps with the <strong>Gradient Explosion Problem</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="for-generative-adversarial-networks">For Generative Adversarial Networks<a class="headerlink" href="#for-generative-adversarial-networks" title="Permanent link"></a></h3>
+<ul>
+<li><strong>Activation Functions and Pooling</strong>
+Avoid sparse gradients: instead of ReLU you should probably use LeakyReLU.
+Same goes for the pooling – MaxPool is the best, except the places where it’s not: AveragePool is
+much better for the architectures which don’t like sparse gradients.</li>
+<li><strong>Normalization</strong>
+It was shown that when you are trainign your discriminator, you should normalize the &ldquo;real&rdquo; and &ldquo;fake&rdquo; (generated) batches separately. Don’t mix the &ldquo;real&rdquo; and &ldquo;fake&rdquo; data into the same batch.</li>
+<li><strong>Optimizers</strong>
+Use different optimization algorithms for your generator and your discriminator. For example you can use Adam for the generator, and SGD for the discriminator.</li>
+<li><strong>Loss and Gradients</strong><ul>
+<li><em>BAD</em> Discriminator loss is approaching zero.</li>
+<li><em>BAD</em> Gradient norms are oscillating or blowing to infinity.</li>
+<li><em>BAD</em> Generator loss is steadily going down (discriminator is being fooled!!!)</li>
+<li><em>GOOD</em> Discriminator loss has low variance and slowly going down.</li>
+</ul>
+</li>
+<li><strong>Generator vs. Discriminator Ratio</strong>
+So far I didn’t see anyone being able to answer conclusively – what is the balance between the generator and discriminator usage during training.</li>
+</ul>
+<h3 id="for-reinforcement-learning">For Reinforcement Learning<a class="headerlink" href="#for-reinforcement-learning" title="Permanent link"></a></h3>
+<p>Just use the Rainbow <a href="/Users/zafar/Git/papers/nn-tips/markdown/%5Bhttps%3A/arxiv.org/abs/1710.02298%5D" title="M. Hessel, J. Modayil, H. van Hasselt, T. Schaul, G. Ostrovski, W. Dabney, D. Horgan, B. Piot, M. Azar, and D. Silver. “Rainbow: Combining Improvements in Deep Reinforcement Learning”. In: ArXiv e-prints (Oct. 2017). arXiv: 1710.02298 [cs.AI].">[9]</a>.</p>
+<h3 id="for-recurrent-networks">For Recurrent Networks<a class="headerlink" href="#for-recurrent-networks" title="Permanent link"></a></h3>
+<ul>
+<li><strong>Don’t shuffle your data</strong>
+Everyone forgets about this one. You cannot shuffle the data when working with the recurrent networks (unless you know what you are doing).</li>
+<li><strong>Clip your gradients</strong>
+Although this is optional for generic networks, for RNNs you most probably need to clip your gradients.</li>
+<li><strong>Normalize your loss</strong>
+The loss should be averaged across the batch. Sum up your loss, and nomalize it by the sequence length. This will allow the losses to be of comparable magnitude.</li>
+<li><strong>Use feed-forward as the first layer</strong>
+Although that’s not what you usually see, it is worth trying to add a feed-forward layer or two first. This will transform the input sequence into more “digestable” dimensions.</li>
+<li><strong>Use “ResNet”-like architectures</strong>
+Recurrent networks need a lot of parameters. To resolve it, stack several smaller recurrent layers and sum the outputs of multiple layers in the end (just like ResNet).</li>
+</ul></article></body></html>
