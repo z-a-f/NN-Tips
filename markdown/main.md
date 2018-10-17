@@ -2,13 +2,14 @@
 _Revision **1.0**._
 _Thanks for suggestions and reviews: **Tao Huang**, **Yun Jiang**, **François Chollet**_ 
 
+----------
+
 ## 1. Workflow
 
 This list is inspired by François Chollet [\[1\]][1]. In general, you want to stick to the following workflow:
 
 ### __Define the problem and assemble a dataset.__
-In fact, make sure these two statements are
-true:
+In fact, make sure these two statements are true:
   - Your output can be predicted given your inputs
   - Your available data is sufficiently informative to learn the relationship between input and output.
 
@@ -61,6 +62,8 @@ Make sure your model has _statistical power_ (beats dumb baseline, s.a. random g
 | Language processing | RNN or 1D CNN |
 | Other sequence data | 1D CNN |
 | Decision making and action prediction | Deep-Q network (CNN + reinforcement) |
+
+
 - __Network size.__ This one is really hard, and I usually start small, overfit, grow. However, there are some rules of thumb that you can follow (there is some theory that you can follow as well [\[3\]][3]).
     - The first layers should be directly proportional to the input dimensionality.
     - Larger networks will always work better, but require stronger regularization.
@@ -90,6 +93,8 @@ Remember to start small, and grow as you go. Here is what I usually do:
 - If the model over-fits, it is too complex or it is time to add more data;
 - Deeper networks learn more abstractions, but are much harder to train;
 - Wider networks have diminishing returns – within the same layer there is a huge difference between four and eight convolution filters, but there is almost no difference between a 128 and 256.
+
+----------
 
 ## 2. Collecation of (not so) obvious advice
 
