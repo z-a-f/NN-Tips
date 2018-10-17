@@ -184,13 +184,13 @@ Although that’s not what you usually see, it is worth trying to add a feed-for
 Recurrent networks need a lot of parameters. To resolve it, stack several smaller recurrent layers and sum the outputs of multiple layers in the end (just like ResNet).
 
 
-[1]: [https://isbnsearch.org/isbn/9781617294433] "F. Chollet. Deep Learning with Python. 1st. Greenwich, CT, USA: Manning Publications Co., 2017. ISBN: 1617294438, 9781617294433."
-[2]: [https://www.kaggle.com] "Kaggle. Accessed: 03-July-2018."
-[3]: [https://en.wikipedia.orNeg/w/index.php?title=VC_dimension&oldid=846805558] "Wikipedia contributors. VC dimension — Wikipedia, The Free Encyclopedia. [Online; accessed 30-July-2018]. 2018."
-[4]: [https://www.coursera.org/lecture/neural-networks/rmsprop-divide-the-gradient-by-a-running-average-of-its-recent-magnitude-YQHki] "T. Tieleman and G. Hinton. Lecture 6.5—RmsProp: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural Networks for Machine Learning. 2012."
-[5]: [https://twitter.com/karpathy/status/1013244313327681536] "Twitter Users. Andrej Karpathy twitter thread: most common neural net mistakes... [On- line; accessed 03-July-2018]. 2018."
-[6]: [https://stats.stackexchange.com/q/352036] "Sycorax. What should I do when my neural network doesn’t learn? Cross Validated. [On-line; accessed 03-July-2018]."
-[7]: [https://pcc.cs.byu.edu/2017/10/02/practical-advice-for-building-deep-neural-networks/] "Matt H. and Daniel R. Practical Advice for Building Deep Neural Networks. [Online; accessed: 03-July-2018]."
-[8]: [https://www.tensorflow.org/] "Martın Abadi et al. TensorFlow: Large-Scale Machine Learning on Heterogeneous Systems. Software available from tensorflow.org. 2015."
-[9]: [https://arxiv.org/abs/1710.02298] "M. Hessel, J. Modayil, H. van Hasselt, T. Schaul, G. Ostrovski, W. Dabney, D. Horgan, B. Piot, M. Azar, and D. Silver. “Rainbow: Combining Improvements in Deep Reinforcement Learning”. In: ArXiv e-prints (Oct. 2017). arXiv: 1710.02298 [cs.AI]."
-[10]: [https://danijar.com/tips-for-training-recurrent-neural-networks/] "Danijar Hafner. Tips for Training Recurrent Neural Networks. [Online; accessed 24-July-2018]."
+[1]: https://isbnsearch.org/isbn/9781617294433 "F. Chollet. Deep Learning with Python. 1st. Greenwich, CT, USA: Manning Publications Co., 2017. ISBN: 1617294438, 9781617294433."
+[2]: https://www.kaggle.com "Kaggle. Accessed: 03-July-2018."
+[3]: https://en.wikipedia.orNeg/w/index.php?title=VC_dimension&oldid=846805558 "Wikipedia contributors. VC dimension — Wikipedia, The Free Encyclopedia. [Online; accessed 30-July-2018]. 2018."
+[4]: https://www.coursera.org/lecture/neural-networks/rmsprop-divide-the-gradient-by-a-running-average-of-its-recent-magnitude-YQHki "T. Tieleman and G. Hinton. Lecture 6.5—RmsProp: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural Networks for Machine Learning. 2012."
+[5]: https://twitter.com/karpathy/status/1013244313327681536 "Twitter Users. Andrej Karpathy twitter thread: most common neural net mistakes... [On- line; accessed 03-July-2018]. 2018."
+[6]: https://stats.stackexchange.com/q/352036 "Sycorax. What should I do when my neural network doesn’t learn? Cross Validated. [On-line; accessed 03-July-2018]."
+[7]: https://pcc.cs.byu.edu/2017/10/02/practical-advice-for-building-deep-neural-networks/ "Matt H. and Daniel R. Practical Advice for Building Deep Neural Networks. [Online; accessed: 03-July-2018]."
+[8]: https://www.tensorflow.org/ "Martın Abadi et al. TensorFlow: Large-Scale Machine Learning on Heterogeneous Systems. Software available from tensorflow.org. 2015."
+[9]: https://arxiv.org/abs/1710.02298 "M. Hessel, J. Modayil, H. van Hasselt, T. Schaul, G. Ostrovski, W. Dabney, D. Horgan, B. Piot, M. Azar, and D. Silver. “Rainbow: Combining Improvements in Deep Reinforcement Learning”. In: ArXiv e-prints (Oct. 2017). arXiv: 1710.02298 [cs.AI]."
+[10]: https://danijar.com/tips-for-training-recurrent-neural-networks/ "Danijar Hafner. Tips for Training Recurrent Neural Networks. [Online; accessed 24-July-2018]."
