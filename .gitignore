@@ -246,3 +246,6 @@ TSWLatexianTemp*
 
 # standalone packages
 *.sta
+
+# Markdown version
+markdown/
